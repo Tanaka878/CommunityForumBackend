@@ -21,8 +21,9 @@ public class AuthenticationService {
 
 
     public AutheticationResponse authenticate(AuthenticationRequest authenticationRequest) {
+        // Correct the order of parameters: username first, password second
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(authenticationRequest.getPassword(),authenticationRequest.getEmail())
+                new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(), authenticationRequest.getPassword())
         );
 
         var user = userRepository.findByEmail(authenticationRequest.getEmail())
@@ -30,7 +31,8 @@ public class AuthenticationService {
 
         String token = jwtService.generateToken(user);
         return AutheticationResponse.builder()
-                .token(token).build();
+                .token(token)
+                .build();
     }
 
     public AutheticationResponse register(RegisterRequest registerRequest) {

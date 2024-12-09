@@ -1,17 +1,12 @@
 package org.example.communityforumapp.config;
 
-import com.nimbusds.jose.crypto.impl.MACProvider;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import org.example.communityforumapp.user.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-
-
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
@@ -20,8 +15,7 @@ import java.util.function.Function;
 
 @Service
 public class JWTService {
-    private final String SECRET_KEY = "JyJ30/l4u7S7fVXqRDOUOk0K1/4TlAq9tTBs6OrnyWeNmIIZZg2jtWf9ePqaYmiZ\n" +
-            "c0iCuiK638zOPX+9HtFVrA==";
+    private final String SECRET_KEY ="";
     public String extractUserName(String jwtToken) {
         return extractClaim(jwtToken,Claims::getSubject);
 
@@ -36,7 +30,7 @@ public class JWTService {
         return Jwts.builder().setClaims(Extraclaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() +1000 *60 *24))
+                .setExpiration(new Date(System.currentTimeMillis() +2_000*64*24))
                 .signWith(getSignIngKey(), SignatureAlgorithm.HS256)
                 .compact();
 

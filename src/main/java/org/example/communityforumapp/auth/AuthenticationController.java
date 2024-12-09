@@ -22,14 +22,16 @@ public class AuthenticationController {
         System.out.println("Endpoint Hit");
         return ResponseEntity.ok(authenticationService.register(registerRequest));
 
-        /// TODO body of the function
+
 
     }
 
-    @PostMapping("/authenticate")
-    public ResponseEntity<AutheticationResponse> authenticate(@RequestBody AuthenticationRequest authenticationRequest){
-        return ResponseEntity.ofNullable(authenticationService.authenticate(authenticationRequest));
+    @PostMapping("/authenticate/")
+    public ResponseEntity<AutheticationResponse> authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
+        AutheticationResponse response = authenticationService.authenticate(authenticationRequest);
+        return ResponseEntity.ok(response); // Return a 200 OK response with the token
     }
+
 
 
 
