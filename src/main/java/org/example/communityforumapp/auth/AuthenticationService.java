@@ -5,11 +5,14 @@ import org.example.communityforumapp.config.JWTService;
 import org.example.communityforumapp.user.Role;
 import org.example.communityforumapp.user.User;
 import org.example.communityforumapp.user.UserRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -36,6 +39,12 @@ public class AuthenticationService {
     }
 
     public AutheticationResponse register(RegisterRequest registerRequest) {
+
+        Optional<User> user1 = userRepository.findByEmail(registerRequest.getEmail());
+        if(user1.isPresent()) {
+            throw new IllegalArgumentException("User already exists with the provided email."); // Or a custom exception
+        }
+
         var user = User.builder()
                 .email(registerRequest.getEmail())
                 .password(passwordEncoder.encode(registerRequest.getPassword()))

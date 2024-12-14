@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/demo-controller")
 @RestController
-public class DemoController {
+public class UserController {
 
     @GetMapping("/greeting")
     public String greeting() {

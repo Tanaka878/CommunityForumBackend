@@ -5,15 +5,13 @@ package org.example.communityforumapp.auth;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Component
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/auth")
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
