@@ -5,7 +5,7 @@ import org.example.communityforumapp.config.JWTService;
 import org.example.communityforumapp.user.Role;
 import org.example.communityforumapp.user.User;
 import org.example.communityforumapp.user.UserRepository;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
