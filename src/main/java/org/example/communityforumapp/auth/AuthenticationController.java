@@ -3,6 +3,8 @@ package org.example.communityforumapp.auth;
 
 
 import lombok.RequiredArgsConstructor;
+import org.example.communityforumapp.config.JWTService;
+import org.example.communityforumapp.user.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
+
 
     @PostMapping("/register/")
     public ResponseEntity<AutheticationResponse> register(@RequestBody RegisterRequest registerRequest) {
@@ -29,6 +32,8 @@ public class AuthenticationController {
         AutheticationResponse response = authenticationService.authenticate(authenticationRequest);
         return ResponseEntity.ok(response); // Return a 200 OK response with the token
     }
+
+
 
 
 
