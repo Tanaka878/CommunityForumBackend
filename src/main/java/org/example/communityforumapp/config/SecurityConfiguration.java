@@ -26,7 +26,7 @@ public class SecurityConfiguration  extends SecurityConfigurerAdapter<DefaultSec
         http
                 .csrf(AbstractHttpConfigurer::disable) // Use the lambda style for configurability
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers( "/api/v1/auth/**").permitAll()
+                        .requestMatchers( "/api/v1/auth/**","/api/v1/demo-controller/fetch").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session

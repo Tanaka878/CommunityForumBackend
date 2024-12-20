@@ -3,8 +3,6 @@ package org.example.communityforumapp.auth;
 
 
 import lombok.RequiredArgsConstructor;
-import org.example.communityforumapp.config.JWTService;
-import org.example.communityforumapp.user.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;

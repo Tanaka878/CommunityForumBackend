@@ -5,14 +5,12 @@ import org.example.communityforumapp.user.User;
 import org.example.communityforumapp.user.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Component
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/demo-controller")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class UserController {
     private final UserService userService;
@@ -24,9 +22,13 @@ public class UserController {
 
     @GetMapping("/fetch")
     public ResponseEntity<User> getUserData(
-            @RequestHeader("Authorization") String token) {
+            @RequestHeader("Authorization") String authorizationHeader) {
+        // Ensure the token is valid and extract email
+        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
+            return ResponseEntity.status(401).body(null); // Unauthorized
+        }
 
-
+        String token = authorizationHeader.substring(7); // Remove "Bearer " prefix
         return userService.findByEmail(token);
     }
 
