@@ -15,6 +15,7 @@ import java.util.function.Function;
 
 @Service
 public class JWTService {
+    private static final long TOKEN_EXPIRATION_TIME = 18_000_000;
     private final String SECRET_KEY ="";
     public String extractUserName(String jwtToken) {
         return extractClaim(jwtToken,Claims::getSubject);
@@ -30,7 +31,7 @@ public class JWTService {
         return Jwts.builder().setClaims(Extraclaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() +2_000*64*24))
+                .setExpiration(new Date(System.currentTimeMillis() + TOKEN_EXPIRATION_TIME))
                 .signWith(getSignIngKey(), SignatureAlgorithm.HS256)
                 .compact();
 
