@@ -32,6 +32,8 @@ public class AuthenticationController {
         return ResponseEntity.ok(response); // Return a 200 OK response with the token
     }
 
+    @PostMapping("")
+
 
 
 
