@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CommunityService {
@@ -52,13 +53,17 @@ public class CommunityService {
     }
 
     public ResponseEntity<List<CommunityData>> getMyCommunities(String email) {
-        List<CommunityData> communities = new ArrayList<>();
-        Optional<User> byEmail = userRepository.findByEmail(email);
-        byEmail.get().getGroupIds().forEach(groupId -> {
-            communities.add(communityRepository.findById(groupId).get());
-        });
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("User with email " + email + " not found"));
+
+
+        List<CommunityData> communities = user.getGroupIds().stream()
+                .map(groupId -> communityRepository.findById(groupId)
+                        .orElseThrow(() -> new IllegalArgumentException("Community with ID " + groupId + " not found")))
+                .collect(Collectors.toList());
+
         return ResponseEntity.ok(communities);
-
-
     }
+
 }
