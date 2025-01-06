@@ -14,6 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/communities")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CommunityController {
 
     @Autowired
@@ -45,5 +46,10 @@ public class CommunityController {
     public ResponseEntity<List<CommunityData>> getAll() {
         List<CommunityData> list = communityRepository.findAll();
         return ResponseEntity.status(200).body(list);
+    }
+
+    @RequestMapping("/getCommunities/{email}")
+    public ResponseEntity<List<CommunityData>> getMycommunities(@PathVariable String email) {
+        return communityService.getMyCommunities(email);
     }
 }
