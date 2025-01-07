@@ -8,8 +8,6 @@ import org.example.communityforumapp.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -29,6 +27,7 @@ public class CommunityService {
 
     @Transactional
     public ResponseEntity<CommunityData> join(Long id, Long communityId) {
+        System.out.println("Uuser has joined the community " + communityId + " with id " + id);
         // Fetch the community data by communityId
         CommunityData community = communityRepository.findById(communityId)
                 .orElseThrow(() -> new IllegalArgumentException("Community not found"));
@@ -37,6 +36,8 @@ public class CommunityService {
         Optional<User> byId = userRepository.findById(id);
         byId.get().getGroupIds().add(communityId);
         userRepository.save(byId.get());
+        System.out.println("User has joined the community " + communityId + " with id " + id);
+
 
         // Get the existing list of user IDs
         List<Long> userIds = community.getUserIds();

@@ -17,11 +17,19 @@ import java.util.Optional;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CommunityController {
 
-    @Autowired
-    private CommunityRepository communityRepository;
-    @Autowired
-    private UserRepository userRepository;
+
+    private final CommunityRepository communityRepository;
+    private final UserRepository userRepository;
     CommunityService communityService;
+
+    @Autowired
+    public CommunityController(CommunityRepository communityRepository,
+                               UserRepository userRepository,
+                               CommunityService communityService) {
+        this.communityRepository = communityRepository;
+        this.userRepository = userRepository;
+        this.communityService = communityService;
+    }
 
     @PostMapping("/createCommunity")
     public ResponseEntity<CommunityData> createCommunity(@RequestBody CommunityData community) {
