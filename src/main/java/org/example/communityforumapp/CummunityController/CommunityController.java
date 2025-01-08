@@ -60,4 +60,10 @@ public class CommunityController {
     public ResponseEntity<List<CommunityData>> getMycommunities(@PathVariable String email) {
         return communityService.getMyCommunities(email);
     }
+
+    @GetMapping("/isMember/{email}/{groupId}")
+    public ResponseEntity<String> getMembers(@PathVariable String email, @PathVariable Long groupId) {
+        return communityService.isUserJoined(email,groupId);
+
+    }
 }

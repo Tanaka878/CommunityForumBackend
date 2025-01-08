@@ -6,6 +6,7 @@ import org.example.communityforumapp.chatInfo.CommunityData;
 import org.example.communityforumapp.user.User;
 import org.example.communityforumapp.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -65,6 +66,30 @@ public class CommunityService {
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(communities);
+    }
+
+    public ResponseEntity<String> isUserJoined(String email, Long groupId) {
+        // Check if the user exists by email
+        Optional<User> user = userRepository.findByEmail(email);
+        if (user.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
+
+        // Check if the group exists by groupId
+        Optional<CommunityData> communityData = communityRepository.findById(groupId);
+        if (communityData.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Community group not found");
+        }
+
+        // Check if the userId exists in the group's userIds
+        Long userId = user.get().getId();
+        boolean isUserInGroup = communityData.get().getUserIds().contains(userId);
+
+        if (isUserInGroup) {
+            return ResponseEntity.ok("User is part of the community group");
+        } else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User is not part of the community group");
+        }
     }
 
 }
