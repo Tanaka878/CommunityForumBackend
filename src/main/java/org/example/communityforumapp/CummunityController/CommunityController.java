@@ -74,4 +74,9 @@ public class CommunityController {
     public ResponseEntity<List<String>> getNicknames() {
         return userService.findNicknames();
     }
+
+    @GetMapping("/getNickname/{id}")
+    public ResponseEntity<String> getNickname(@PathVariable Long id) {
+        return userService.getNickName(id);
+    }
 }

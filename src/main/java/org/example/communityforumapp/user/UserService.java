@@ -45,4 +45,9 @@ public class UserService {
         userRepository.findAll().forEach(user -> nicknames.add(user.getNickname()));
         return ResponseEntity.ok(nicknames);
     }
+
+    public ResponseEntity<String> getNickName(Long id) {
+        String nickname = userRepository.findById(id).get().getNickname();
+        return ResponseEntity.ok(nickname);
+    }
 }
