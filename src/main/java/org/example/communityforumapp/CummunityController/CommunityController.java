@@ -5,6 +5,7 @@ import org.example.communityforumapp.CommunityService.CommunityService;
 import org.example.communityforumapp.chatInfo.CommunityData;
 import org.example.communityforumapp.user.User;
 import org.example.communityforumapp.user.UserRepository;
+import org.example.communityforumapp.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,15 +21,17 @@ public class CommunityController {
 
     private final CommunityRepository communityRepository;
     private final UserRepository userRepository;
+    private final UserService userService;
     CommunityService communityService;
 
     @Autowired
     public CommunityController(CommunityRepository communityRepository,
                                UserRepository userRepository,
-                               CommunityService communityService) {
+                               CommunityService communityService, UserService userService) {
         this.communityRepository = communityRepository;
         this.userRepository = userRepository;
         this.communityService = communityService;
+        this.userService = userService;
     }
 
     @PostMapping("/createCommunity")
@@ -57,7 +60,7 @@ public class CommunityController {
     }
 
     @RequestMapping("/getCommunities/{email}")
-    public ResponseEntity<List<CommunityData>> getMycommunities(@PathVariable String email) {
+    public ResponseEntity<List<CommunityData>> getCommunities(@PathVariable String email) {
         return communityService.getMyCommunities(email);
     }
 
@@ -65,5 +68,10 @@ public class CommunityController {
     public ResponseEntity<String> getMembers(@PathVariable String email, @PathVariable Long groupId) {
         return communityService.isUserJoined(email,groupId);
 
+    }
+
+    @GetMapping("/getNicknames")
+    public ResponseEntity<List<String>> getNicknames() {
+        return userService.findNicknames();
     }
 }
