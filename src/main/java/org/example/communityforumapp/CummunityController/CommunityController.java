@@ -7,10 +7,13 @@ import org.example.communityforumapp.user.User;
 import org.example.communityforumapp.user.UserRepository;
 import org.example.communityforumapp.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -74,9 +77,21 @@ public class CommunityController {
     public ResponseEntity<List<String>> getNicknames() {
         return userService.findNicknames();
     }
-
     @GetMapping("/getNickname/{id}")
-    public ResponseEntity<String> getNickname(@PathVariable Long id) {
-        return userService.getNickName(id);
+    public ResponseEntity<Map<String, String>> getNickname(@PathVariable Long id) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent()) {
+            System.out.println("User: " + user.get().getNickname());
+            String nickname = user.get().getNickname();
+            Map<String, String> response = new HashMap<>();
+            response.put("nickname", nickname);
+            System.out.println("The nickname is " + nickname);
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("error", "User not found"));
+        }
     }
+
+
 }

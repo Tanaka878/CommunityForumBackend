@@ -2,11 +2,17 @@ package org.example.communityforumapp.user;
 
 import org.example.communityforumapp.config.JWTService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Service    
 public class UserService {
@@ -46,8 +52,4 @@ public class UserService {
         return ResponseEntity.ok(nicknames);
     }
 
-    public ResponseEntity<String> getNickName(Long id) {
-        String nickname = userRepository.findById(id).get().getNickname();
-        return ResponseEntity.ok(nickname);
-    }
 }
