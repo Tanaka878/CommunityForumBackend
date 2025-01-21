@@ -49,6 +49,7 @@ public class AuthenticationService {
                 .email(registerRequest.getEmail())
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .username(registerRequest.getEmail())
+                .nickname(registerRequest.getNickname())
                 .role(Role.USER)
                 .build();
         userRepository.save(user);
