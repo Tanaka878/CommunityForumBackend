@@ -46,6 +46,11 @@ public class CommunityController {
         return ResponseEntity.status(201).body(savedCommunity);
     }
 
+    @PostMapping("/isMember/{email}/{communityId}")
+    public ResponseEntity<Boolean> isMember(@PathVariable String email, @PathVariable Long communityId) {
+        return userService.isMember(email,communityId);
+    }
+
     @PostMapping("/join/{email}/{communityId}")
     public ResponseEntity<CommunityData> joinCommunity(@PathVariable String email,@PathVariable Long communityId) {
         Optional<User> findUser = userRepository.findByEmail(email);
@@ -77,6 +82,8 @@ public class CommunityController {
     public ResponseEntity<List<String>> getNicknames() {
         return userService.findNicknames();
     }
+
+
     @GetMapping("/getNickname/{id}")
     public ResponseEntity<Map<String, String>> getNickname(@PathVariable Long id) {
         Optional<User> user = userRepository.findById(id);
@@ -92,6 +99,7 @@ public class CommunityController {
                     .body(Map.of("error", "User not found"));
         }
     }
+
 
 
 }
