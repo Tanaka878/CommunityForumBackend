@@ -122,5 +122,6 @@ public class CommunityService {
             profileDTO.setNickname(user.get().getNickname());
             return ResponseEntity.ok(profileDTO);
         }
+        else return ResponseEntity.notFound().build();
     }
 }
