@@ -111,7 +111,7 @@ public class CommunityService {
         return ResponseEntity.internalServerError().body("Filed to exit  the community " + communityId);
     }
 
-    public ResponseEntity<String> getProfileData(Long userId) {
+    public ResponseEntity<ProfileDTO> getProfileData(Long userId) {
         Optional<User> user= userRepository.findById(userId);
         if (user.isPresent()) {
             ProfileDTO profileDTO = new ProfileDTO();
@@ -120,6 +120,7 @@ public class CommunityService {
             profileDTO.setName(user.get().getFirstName());
             profileDTO.setGender(user.get().getGender());
             profileDTO.setNickname(user.get().getNickname());
+            return ResponseEntity.ok(profileDTO);
         }
     }
 }
