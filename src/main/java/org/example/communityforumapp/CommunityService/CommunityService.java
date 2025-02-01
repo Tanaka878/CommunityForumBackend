@@ -2,6 +2,7 @@ package org.example.communityforumapp.CommunityService;
 
 import jakarta.transaction.Transactional;
 import org.example.communityforumapp.CommunityRepo.CommunityRepository;
+import org.example.communityforumapp.DTO.ProfileDTO;
 import org.example.communityforumapp.chatInfo.CommunityData;
 import org.example.communityforumapp.user.User;
 import org.example.communityforumapp.user.UserRepository;
@@ -28,18 +29,18 @@ public class CommunityService {
 
     @Transactional
     public ResponseEntity<CommunityData> join(Long id, Long communityId) {
-        System.out.println("Uuser has joined the community " + communityId + " with id " + id);
+        System.out.println("User has joined the community " + communityId + " with id " + id);
         // Fetch the community data by communityId
         CommunityData community = communityRepository.findById(communityId)
                 .orElseThrow(() -> new IllegalArgumentException("Community not found"));
 
         //adding  the group to user
         Optional<User> byId = userRepository.findById(id);
-        byId.get().getGroupIds().add(communityId);
-        userRepository.save(byId.get());
+        if (byId.isPresent()) {
+            byId.get().getGroupIds().add(communityId);
+            userRepository.save(byId.get());
+        }
         System.out.println("User has joined the community " + communityId + " with id " + id);
-
-
         // Get the existing list of user IDs
         List<Long> userIds = community.getUserIds();
 
@@ -92,4 +93,33 @@ public class CommunityService {
         }
     }
 
+    public ResponseEntity<String> getNumberOfGroups(Long id) {
+        Optional<User> userOptional = userRepository.findById(id);
+        return userOptional.map(user -> ResponseEntity.ok(String.valueOf(user.getGroupIds().size()))).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found"));
+    }
+
+
+    @Transactional
+    public ResponseEntity<String> exitGroup(Long communityId, Long userId) {
+        Optional<CommunityData> communityData = communityRepository.findById(communityId);
+        if (communityData.isPresent()) {
+            communityData.get().getUserIds().remove(userId);
+            communityRepository.save(communityData.get());
+            return ResponseEntity.ok("User has exited the community " + communityId);
+
+        }
+        return ResponseEntity.internalServerError().body("Filed to exit  the community " + communityId);
+    }
+
+    public ResponseEntity<String> getProfileData(Long userId) {
+        Optional<User> user= userRepository.findById(userId);
+        if (user.isPresent()) {
+            ProfileDTO profileDTO = new ProfileDTO();
+            //populating  the DTO with the data
+            profileDTO.setEmail(user.get().getEmail());
+            profileDTO.setName(user.get().getFirstName());
+            profileDTO.setGender(user.get().getGender());
+            profileDTO.setNickname(user.get().getNickname());
+        }
+    }
 }

@@ -39,10 +39,7 @@ public class CommunityController {
 
     @PostMapping("/createCommunity")
     public ResponseEntity<CommunityData> createCommunity(@RequestBody CommunityData community) {
-        // Save the community object to the database
         CommunityData savedCommunity = communityRepository.save(community);
-
-        // Return the saved object along with HTTP 201 status
         return ResponseEntity.status(201).body(savedCommunity);
     }
 
@@ -75,7 +72,6 @@ public class CommunityController {
     @GetMapping("/isMember/{email}/{groupId}")
     public ResponseEntity<String> getMembers(@PathVariable String email, @PathVariable Long groupId) {
         return communityService.isUserJoined(email,groupId);
-
     }
 
     @GetMapping("/getNicknames")
@@ -85,7 +81,7 @@ public class CommunityController {
 
 
     @GetMapping("/getNickname/{id}")
-    public ResponseEntity<Map<String, String>> getNickname(@PathVariable Long id) {
+    public ResponseEntity<Map<String,String>> getNickname(@PathVariable Long id) {
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent()) {
             System.out.println("User: " + user.get().getNickname());
@@ -100,6 +96,21 @@ public class CommunityController {
         }
     }
 
+    @RequestMapping("/numberOfGroups/{id}")
+    public ResponseEntity<String> getNumberOfGroups(@PathVariable Long id) {
+        return communityService.getNumberOfGroups(id);
+    }
+
+    @RequestMapping("/exitGroup/{communityId}/{userId}")
+    public ResponseEntity<String> exitGroup(@PathVariable Long communityId, @PathVariable Long userId) {
+        return communityService.exitGroup(communityId,userId);
+    }
+
+
+    RequestMapping("/getProfileData")
+    public ResponseEntity<String> getProfileData(@PathVariable Long userId) {
+        return communityService.getProfileData(userId);
+        }
 
 
 }

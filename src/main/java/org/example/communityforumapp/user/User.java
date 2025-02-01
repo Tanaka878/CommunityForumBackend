@@ -5,10 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.communityforumapp.DTO.Gender;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,6 +30,7 @@ public class User implements UserDetails {
     private String password;
     private String email;
     private Role role;
+    private Gender gender;
     private LocalDate localDate = LocalDate.now();
     @ElementCollection
     private List<Long> groupIds = new ArrayList<>();
