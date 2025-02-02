@@ -102,7 +102,12 @@ public class CommunityService {
     @Transactional
     public ResponseEntity<String> exitGroup(Long communityId, Long userId) {
         Optional<CommunityData> communityData = communityRepository.findById(communityId);
-        if (communityData.isPresent()) {
+        Optional<User> user = userRepository.findById(userId);
+        if (communityData.isPresent() && user.isPresent()) {
+            //removing the communityId from the user group array
+            user.get().getGroupIds().remove(communityId);
+            userRepository.save(user.get());
+            //removing the userId from the group
             communityData.get().getUserIds().remove(userId);
             communityRepository.save(communityData.get());
             return ResponseEntity.ok("User has exited the community " + communityId);

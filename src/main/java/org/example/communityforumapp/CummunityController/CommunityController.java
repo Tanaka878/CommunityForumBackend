@@ -103,8 +103,8 @@ public class CommunityController {
     }
 
     @RequestMapping("/exitGroup/{communityId}/{userId}")
-    public ResponseEntity<String> exitGroup(@PathVariable Long communityId, @PathVariable Long userId) {
-        return communityService.exitGroup(communityId,userId);
+    public ResponseEntity<String> exitGroup(@PathVariable Long groupId, @PathVariable Long userId) {
+        return communityService.exitGroup(groupId,userId);
     }
 
 
