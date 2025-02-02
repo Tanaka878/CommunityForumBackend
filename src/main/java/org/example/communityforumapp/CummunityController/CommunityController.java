@@ -108,7 +108,7 @@ public class CommunityController {
     }
 
 
-    @RequestMapping("/getProfileData")
+    @RequestMapping("/getProfileData/{userId}")
     public ResponseEntity<ProfileDTO> getProfileData(@PathVariable Long userId) {
         return communityService.getProfileData(userId);
         }
