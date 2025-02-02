@@ -122,7 +122,7 @@ public class CommunityService {
             profileDTO.setGender(user.get().getGender());
             profileDTO.setNickname(user.get().getNickname());
             profileDTO.setNumberOfGroups(String.valueOf(groups));
-            profileDTO.setDateJoined(user.get().getLocalDate());
+            profileDTO.setDateJoined(String.valueOf(user.get().getLocalDate()));
             return ResponseEntity.ok(profileDTO);
         }
         else return ResponseEntity.notFound().build();

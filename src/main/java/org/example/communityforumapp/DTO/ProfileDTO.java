@@ -13,5 +13,5 @@ public class ProfileDTO {
     String numberOfGroups;
     Gender gender;
     String Nickname;
-    LocalDate dateJoined;
+    String dateJoined;
 }
