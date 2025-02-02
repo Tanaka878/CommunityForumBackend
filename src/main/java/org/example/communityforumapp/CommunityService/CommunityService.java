@@ -114,12 +114,14 @@ public class CommunityService {
     public ResponseEntity<ProfileDTO> getProfileData(Long userId) {
         Optional<User> user= userRepository.findById(userId);
         if (user.isPresent()) {
+           int groups =  user.get().getGroupIds().size();
             ProfileDTO profileDTO = new ProfileDTO();
             //populating  the DTO with the data
             profileDTO.setEmail(user.get().getEmail());
             profileDTO.setName(user.get().getFirstName());
             profileDTO.setGender(user.get().getGender());
             profileDTO.setNickname(user.get().getNickname());
+            profileDTO.setNumberOfGroups(String.valueOf(groups));
             return ResponseEntity.ok(profileDTO);
         }
         else return ResponseEntity.notFound().build();
