@@ -87,9 +87,11 @@ public class CommunityService {
         Long userId = user.get().getId();
         boolean isUserInGroup = communityData.get().getUserIds().contains(userId);
         int size = communityData.get().getUserIds().size();
+
         ChatDataDTO chatDataDTO = new ChatDataDTO();
-        chatDataDTO.setMember(isUserInGroup);
+        chatDataDTO.setIsMember(isUserInGroup);  // Changed from setMember to setIsMember
         chatDataDTO.setUsersCount(size);
+
         return ResponseEntity.ok(chatDataDTO);
     }
 

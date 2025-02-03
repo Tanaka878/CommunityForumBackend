@@ -113,6 +113,4 @@ public class CommunityController {
     public ResponseEntity<ProfileDTO> getProfileData(@PathVariable Long userId) {
         return communityService.getProfileData(userId);
         }
-
-
 }

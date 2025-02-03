@@ -1,9 +1,22 @@
 package org.example.communityforumapp.DTO;
 
-import lombok.Data;
+import lombok.Getter;
 
-@Data
 public class ChatDataDTO {
-    boolean isMember;
-    int usersCount;
+    private boolean isMember;  // Changed from member to isMember to match frontend
+    @Getter
+    private int usersCount;
+
+    // Getters and setters
+    public boolean getIsMember() {
+        return isMember;
+    }
+
+    public void setIsMember(boolean isMember) {
+        this.isMember = isMember;
+    }
+
+    public void setUsersCount(int usersCount) {
+        this.usersCount = usersCount;
+    }
 }
