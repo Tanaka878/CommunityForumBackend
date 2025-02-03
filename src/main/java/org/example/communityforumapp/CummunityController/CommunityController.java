@@ -2,6 +2,7 @@ package org.example.communityforumapp.CummunityController;
 
 import org.example.communityforumapp.CommunityRepo.CommunityRepository;
 import org.example.communityforumapp.CommunityService.CommunityService;
+import org.example.communityforumapp.DTO.ChatDataDTO;
 import org.example.communityforumapp.DTO.ProfileDTO;
 import org.example.communityforumapp.chatInfo.CommunityData;
 import org.example.communityforumapp.user.User;
@@ -71,7 +72,7 @@ public class CommunityController {
     }
 
     @GetMapping("/isMember/{email}/{groupId}")
-    public ResponseEntity<String> getMembers(@PathVariable String email, @PathVariable Long groupId) {
+    public ResponseEntity<ChatDataDTO> getMembers(@PathVariable String email, @PathVariable Long groupId) {
         return communityService.isUserJoined(email,groupId);
     }
 

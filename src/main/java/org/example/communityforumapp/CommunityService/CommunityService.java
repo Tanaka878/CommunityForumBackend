@@ -2,6 +2,7 @@ package org.example.communityforumapp.CommunityService;
 
 import jakarta.transaction.Transactional;
 import org.example.communityforumapp.CommunityRepo.CommunityRepository;
+import org.example.communityforumapp.DTO.ChatDataDTO;
 import org.example.communityforumapp.DTO.ProfileDTO;
 import org.example.communityforumapp.chatInfo.CommunityData;
 import org.example.communityforumapp.user.User;
@@ -69,28 +70,27 @@ public class CommunityService {
         return ResponseEntity.ok(communities);
     }
 
-    public ResponseEntity<String> isUserJoined(String email, Long groupId) {
+    public ResponseEntity<ChatDataDTO> isUserJoined(String email, Long groupId) {
         // Check if the user exists by email
         Optional<User> user = userRepository.findByEmail(email);
         if (user.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
         // Check if the group exists by groupId
         Optional<CommunityData> communityData = communityRepository.findById(groupId);
         if (communityData.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Community group not found");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
         // Check if the userId exists in the group's userIds
         Long userId = user.get().getId();
         boolean isUserInGroup = communityData.get().getUserIds().contains(userId);
-
-        if (isUserInGroup) {
-            return ResponseEntity.ok("User is part of the community group");
-        } else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User is not part of the community group");
-        }
+        int size = communityData.get().getUserIds().size();
+        ChatDataDTO chatDataDTO = new ChatDataDTO();
+        chatDataDTO.setMember(isUserInGroup);
+        chatDataDTO.setUsersCount(size);
+        return ResponseEntity.ok(chatDataDTO);
     }
 
     public ResponseEntity<String> getNumberOfGroups(Long id) {
