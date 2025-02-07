@@ -3,7 +3,7 @@ package org.example.communityforumapp.DTO;
 import lombok.Getter;
 
 public class ChatDataDTO {
-    private boolean isMember;  // Changed from member to isMember to match frontend
+    private boolean isMember;
     @Getter
     private int usersCount;
 
