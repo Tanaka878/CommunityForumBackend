@@ -1,4 +1,4 @@
-package org.example.communityforumapp.DTO;
+package org.example.communityforumapp.utils;
 
 public enum Gender {
     MALE,FEMALE,OTHER;

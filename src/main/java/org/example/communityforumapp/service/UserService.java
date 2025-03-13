@@ -1,7 +1,9 @@
-package org.example.communityforumapp.user;
-import org.example.communityforumapp.CommunityRepo.CommunityRepository;
-import org.example.communityforumapp.chatInfo.CommunityData;
+package org.example.communityforumapp.service;
+import org.example.communityforumapp.domain.User;
+import org.example.communityforumapp.repository.CommunityRepository;
+import org.example.communityforumapp.dto.CommunityData;
 import org.example.communityforumapp.config.JWTService;
+import org.example.communityforumapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

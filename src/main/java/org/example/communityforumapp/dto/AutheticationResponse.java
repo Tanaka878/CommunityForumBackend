@@ -1,4 +1,4 @@
-package org.example.communityforumapp.auth;
+package org.example.communityforumapp.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

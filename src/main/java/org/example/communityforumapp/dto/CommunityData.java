@@ -1,8 +1,7 @@
-package org.example.communityforumapp.chatInfo;
+package org.example.communityforumapp.dto;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;

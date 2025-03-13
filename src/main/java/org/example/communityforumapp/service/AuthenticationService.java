@@ -1,10 +1,13 @@
-package org.example.communityforumapp.auth;
+package org.example.communityforumapp.service;
 
 import lombok.RequiredArgsConstructor;
 import org.example.communityforumapp.config.JWTService;
-import org.example.communityforumapp.user.Role;
-import org.example.communityforumapp.user.User;
-import org.example.communityforumapp.user.UserRepository;
+import org.example.communityforumapp.dto.AuthenticationRequest;
+import org.example.communityforumapp.dto.AutheticationResponse;
+import org.example.communityforumapp.dto.RegisterRequest;
+import org.example.communityforumapp.utils.Role;
+import org.example.communityforumapp.domain.User;
+import org.example.communityforumapp.repository.UserRepository;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

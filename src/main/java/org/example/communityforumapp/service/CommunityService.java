@@ -1,12 +1,12 @@
-package org.example.communityforumapp.CommunityService;
+package org.example.communityforumapp.service;
 
 import jakarta.transaction.Transactional;
-import org.example.communityforumapp.CommunityRepo.CommunityRepository;
-import org.example.communityforumapp.DTO.ChatDataDTO;
-import org.example.communityforumapp.DTO.ProfileDTO;
-import org.example.communityforumapp.chatInfo.CommunityData;
-import org.example.communityforumapp.user.User;
-import org.example.communityforumapp.user.UserRepository;
+import org.example.communityforumapp.repository.CommunityRepository;
+import org.example.communityforumapp.dto.ChatDataDTO;
+import org.example.communityforumapp.dto.ProfileDTO;
+import org.example.communityforumapp.dto.CommunityData;
+import org.example.communityforumapp.domain.User;
+import org.example.communityforumapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

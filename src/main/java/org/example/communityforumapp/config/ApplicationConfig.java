@@ -1,7 +1,7 @@
 package org.example.communityforumapp.config;
 
 import lombok.RequiredArgsConstructor;
-import org.example.communityforumapp.user.UserRepository;
+import org.example.communityforumapp.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -1,5 +1,6 @@
-package org.example.communityforumapp.user;
+package org.example.communityforumapp.repository;
 
+import org.example.communityforumapp.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

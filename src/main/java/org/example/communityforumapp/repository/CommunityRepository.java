@@ -1,6 +1,6 @@
-package org.example.communityforumapp.CommunityRepo;
+package org.example.communityforumapp.repository;
 
-import org.example.communityforumapp.chatInfo.CommunityData;
+import org.example.communityforumapp.dto.CommunityData;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,8 +1,8 @@
-package org.example.communityforumapp.auth;
+package org.example.communityforumapp.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.communityforumapp.user.User;
-import org.example.communityforumapp.user.UserService;
+import org.example.communityforumapp.domain.User;
+import org.example.communityforumapp.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;

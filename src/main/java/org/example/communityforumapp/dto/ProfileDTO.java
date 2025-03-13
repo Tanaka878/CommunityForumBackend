@@ -1,9 +1,8 @@
-package org.example.communityforumapp.DTO;
+package org.example.communityforumapp.dto;
 
 import lombok.Data;
 import lombok.ToString;
-
-import java.time.LocalDate;
+import org.example.communityforumapp.utils.Gender;
 
 @Data
 @ToString

@@ -1,4 +1,4 @@
-package org.example.communityforumapp.DTO;
+package org.example.communityforumapp.dto;
 
 import lombok.Getter;
 
