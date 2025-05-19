@@ -6,8 +6,6 @@ public class ChatDataDTO {
     private boolean isMember;
     @Getter
     private int usersCount;
-
-    // Getters and setters
     public boolean getIsMember() {
         return isMember;
     }
