@@ -1,6 +1,6 @@
 package org.example.communityforumapp.service;
 
-import lombok.RequiredArgsConstructor;
+
 import org.example.communityforumapp.config.JWTService;
 import org.example.communityforumapp.dto.AuthenticationRequest;
 import org.example.communityforumapp.dto.AutheticationResponse;
@@ -8,7 +8,6 @@ import org.example.communityforumapp.dto.RegisterRequest;
 import org.example.communityforumapp.utils.Role;
 import org.example.communityforumapp.domain.User;
 import org.example.communityforumapp.repository.UserRepository;
-
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,12 +18,18 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class AuthenticationService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JWTService jwtService;
     private final AuthenticationManager authenticationManager;
+
+    public AuthenticationService(UserRepository userRepository, PasswordEncoder passwordEncoder, JWTService jwtService, AuthenticationManager authenticationManager) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
+        this.authenticationManager = authenticationManager;
+    }
 
 
     public AutheticationResponse authenticate(AuthenticationRequest authenticationRequest) {
@@ -37,16 +42,16 @@ public class AuthenticationService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         String token = jwtService.generateToken(user);
-        return AutheticationResponse.builder()
-                .token(token)
-                .build();
+        AutheticationResponse autheticationResponse = new AutheticationResponse();
+        autheticationResponse.setToken(token);
+        return autheticationResponse;
     }
 
     public AutheticationResponse register(RegisterRequest registerRequest) {
 
         Optional<User> user1 = userRepository.findByEmail(registerRequest.getEmail());
         if(user1.isPresent()) {
-            throw new IllegalArgumentException("User already exists with the provided email."); // Or a custom exception
+            throw new IllegalArgumentException("User already exists with the provided email.");
         }
 
         var user = User.builder()
@@ -59,7 +64,8 @@ public class AuthenticationService {
                 .build();
         userRepository.save(user);
         String token = jwtService.generateToken(user);
-        return AutheticationResponse.builder()
-                .token(token).build();
+        AutheticationResponse autheticationResponse = new AutheticationResponse();
+        autheticationResponse.setToken(token);
+        return autheticationResponse;
     }
 }

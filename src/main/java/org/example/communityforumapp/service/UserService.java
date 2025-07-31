@@ -21,10 +21,10 @@ public class UserService {
     private final CommunityRepository communityRepository;
 
     @Autowired
-    public UserService(JWTService jwtService, UserRepository userRepository, List<String> nicknames, CommunityRepository communityRepository) {
+    public UserService(JWTService jwtService, UserRepository userRepository, CommunityRepository communityRepository) {
         this.jwtService = jwtService;
         this.userRepository = userRepository;
-        this.nicknames = nicknames;
+        this.nicknames = new ArrayList<>();
         this.communityRepository = communityRepository;
     }
 

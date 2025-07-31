@@ -12,12 +12,16 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 @Component
-@RequiredArgsConstructor
+
 @RequestMapping("/api/v1/auth")
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
+
+    public AuthenticationController(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
+    }
 
 
     @PostMapping("/register/")

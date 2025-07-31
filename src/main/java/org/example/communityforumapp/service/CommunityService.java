@@ -89,7 +89,7 @@ public class CommunityService {
         int size = communityData.get().getUserIds().size();
 
         ChatDataDTO chatDataDTO = new ChatDataDTO();
-        chatDataDTO.setIsMember(isUserInGroup);  // Changed from setMember to setIsMember
+        chatDataDTO.setIsMember(isUserInGroup);
         chatDataDTO.setUsersCount(size);
 
         return ResponseEntity.ok(chatDataDTO);

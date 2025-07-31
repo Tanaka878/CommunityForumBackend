@@ -86,7 +86,6 @@ public class CommunityController {
     public ResponseEntity<Map<String,String>> getNickname(@PathVariable Long id) {
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent()) {
-            System.out.println("User: " + user.get().getNickname());
             String nickname = user.get().getNickname();
             Map<String, String> response = new HashMap<>();
             response.put("nickname", nickname);
